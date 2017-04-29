@@ -2,9 +2,7 @@ FROM alpine:latest
 
 MAINTAINER Open Source Services [opensourceservices.fr]
 
-RUN apk add --update \
-    transmission-daemon \
-    && rm -rf /var/cache/apk/*
+RUN apk add --no-cache transmission-daemon
 
 RUN mkdir -p /transmission/downloads \
   && mkdir -p /transmission/incomplete \
@@ -15,7 +13,7 @@ COPY src/ .
 VOLUME ["/transmission/downloads"]
 VOLUME ["/transmission/incomplete"]
 
-EXPOSE 9091 51413/tcp 51413/udp
+EXPOSE 9091
 
 ENV USERNAME admin
 ENV PASSWORD password
